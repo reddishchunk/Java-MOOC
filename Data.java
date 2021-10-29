@@ -1,13 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author 14073
- */
+import java.util.ArrayList;
+
+
 public class Data {
+    private ArrayList<String> name;
+    private ArrayList<Double> price;
     
+    public Data() {
+        this.name = new ArrayList<String>();
+        this.price = new ArrayList<Double>();
+    }
+    
+    public void addEntry(String name, double price) {
+        this.name.add(name);
+        this.price.add(price);
+    }
+    
+    @Override
+    public String toString() {
+        return this.name + " " + this.price;
+    }
 }
+
