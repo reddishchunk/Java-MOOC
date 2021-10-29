@@ -8,32 +8,40 @@ public class FileReader {
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Data data = new Data();
+        ArrayList<Data> dataList = new ArrayList<>();
         System.out.println("FileReader initialized.");
         System.out.println("Options: read, help, exit");
         
         while (true) {
-            if (scanner.nextLine().equals("read")) {
+            String input = scanner.nextLine();
+            
+            if (input.equals("read")) {
                 System.out.println("Enter file name: ");
                 String fileName = scanner.nextLine();
                 
                 try (Scanner reader = new Scanner(Paths.get(fileName))) {
                     while (scanner.hasNextLine()) {
                         String line = scanner.nextLine();
+                        if (line.isEmpty()) {
+                            continue;
+                        }
                         String[] parts = line.split(",");
-                        data.addEntry(parts[0], Integer.valueOf(parts[1]));
+                        String name = parts[0];
+                        double price = Double.valueOf(parts[1]);
+                        dataList.add(new Data(name, price));
                     }
                     
-                    for (Data entry : data) {            //This is the for each loop
-                        System.out.println(entry);
+                    for (Data entry : dataList) {
+                        System.out.println(entry.toString()); //NOT PRINTING!
                     }
                 } catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());
                 }
                 
-            } else if (scanner.nextLine().equals("help")) {
+            } else if (input.equals("help")) {
                 System.out.println("This program is designed to parse data files in csv format. The data should be in two columns with the name first and the data second");
-            } else if (scanner.nextLine().equals("exit")) {
+                continue;
+            } else if (input.equals("exit")) {
                 System.out.println("Exit requested.");
                 break;
             } else {
