@@ -24,7 +24,7 @@ public class FileReader {
                         data.addEntry(parts[0], Integer.valueOf(parts[1]));
                     }
                     
-                    for (Data entry : data) {
+                    for (Data entry : data) {            //This is the for each loop
                         System.out.println(entry);
                     }
                 } catch (Exception e) {
